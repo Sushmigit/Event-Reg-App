@@ -1,0 +1,52 @@
+/* Pricing-inspired dark browse styles */
+
+.browse-page {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  
+  flex-direction: column;
+  background: var(--color-surface, #0c0e12);
+  color: var(--color-on-surface, #f3f7fa);
+  font-family: var(--font-family-body, system-ui, -apple-system, 'Segoe UI', Roboto);
+}
+
+.browse-hero { text-align: center; padding: 3rem 1rem 1.5rem; }
+.browse-hero h1 { margin: 0; font-size: 2.5rem; font-weight: 800; color: var(--color-on-surface); }
+.browse-hero p { margin-top: .5rem; color: var(--color-on-surface-secondary); }
+
+.cards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.25rem; max-width: 1200px; margin: 0 auto; padding: 1.5rem; }
+
+/* Use the same tokens as pricing-card for consistent look */
+.event-card {
+  gap: var(--spacing-md);
+  border: 1px solid var(--color-border);
+  display: flex;
+  padding: var(--spacing-xl);
+  position: relative;
+  background: var(--color-surface-elevated);
+  box-shadow: var(--shadow-level-2);
+  transition: transform var(--animation-duration-fast) var(--animation-curve-primary), box-shadow var(--animation-duration-fast) var(--animation-curve-primary), border-color var(--animation-duration-fast) var(--animation-curve-primary);
+  border-radius: var(--border-radius-lg);
+  flex-direction: column;
+}
+
+.event-card:hover { transform: translateY(-6px) scale(1.01); box-shadow: var(--shadow-level-3); }
+
+.card-thumb { width: 100%; height: 180px; object-fit: cover; border-radius: var(--border-radius-md); display: block; margin-bottom: 1rem; }
+.event-card h3 { margin: 0 0 .5rem; font-size: var(--font-size-xl); color: var(--color-on-surface); }
+.event-card .muted { color: var(--color-on-surface-secondary); margin: 0 0 .75rem; }
+
+/* Featured/Most-popular look like pricing-card-featured */
+.cards-grid .event-card:nth-child(2) { border: 2px solid var(--color-primary); transform: scale(1.05); box-shadow: var(--shadow-level-3); }
+
+/* Subtle per-card accents to add color variation */
+.cards-grid .event-card:nth-child(1) { border-color: color-mix(in srgb, var(--color-primary) 12%, var(--color-border)); }
+.cards-grid .event-card:nth-child(3) { border-color: color-mix(in srgb, var(--color-accent) 8%, var(--color-border)); }
+.cards-grid .event-card:nth-child(4) { border-color: color-mix(in srgb, var(--color-secondary) 8%, var(--color-border)); }
+
+.btn-outline { border: 1px solid var(--color-border); background: transparent; color: var(--color-on-surface); padding: .5rem .9rem; border-radius: 10px; }
+.btn-outline:hover { background: color-mix(in srgb, var(--color-on-surface) 8%, transparent); }
+
+/* Keep nav/footer visible */
+.browse-page .navigation, .browse-page .footer-main { z-index: 9999; position: relative; }

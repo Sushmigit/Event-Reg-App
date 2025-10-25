@@ -1,0 +1,77 @@
+
+:root {
+  /* Base font and color setup */
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  color: #213547;
+  background-color: #ffffff;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Link styles */
+a {
+  font-weight: 500;
+  color: #2563eb; /* Pleasant blue */
+  text-decoration: none;
+}
+
+a:hover {
+  color: #1d4ed8;
+}
+
+/* Reset body layout */
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  background-color: #ffffff; /* Keep plain white background */
+}
+
+/* Ensure root container fills screen */
+html, body, #root {
+  height: 100%;
+  width: 100%;
+}
+
+/* Layout wrapper for the app */
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Heading styles */
+h1 {
+  font-size: 2.5em;
+  line-height: 1.1;
+  margin: 0;
+}
+
+/* Button base style */
+button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #2563eb;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.25s ease, border-color 0.25s ease;
+}
+
+button:hover {
+  background-color: #1d4ed8;
+}
+
+/* Optional: focus style */
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
