@@ -56,5 +56,6 @@ jobs:
         with:
           app-name: 'Event-App'
           slot-name: 'Production'
-          package: ./node-app   # ✅ deploy the actual Vite build folder
+          package: ./node-app/dist   # ✅ deploy the actual Vite build folder
+
 
