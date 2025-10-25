@@ -1,59 +1,26 @@
-name: Build and deploy Vite React app to Azure Web App - Event-App
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+import path from 'path'
 
-on:
-  push:
-    branches:
-      - main
-  workflow_dispatch:
+// https://vite.dev/config/
+export default defineConfig({
+  plugins: [
+    react({
+      babel: {
+        plugins: [['babel-plugin-react-compiler']],
+      },
+    }),
+  ],
+  resolve: {
+    alias: {
+      'dangerous-html/react': path.resolve(__dirname, 'src/libs/dangerous-html/react.js'),
+      'dangerous-html': path.resolve(__dirname, 'src/libs/dangerous-html/index.js'),
+      'react-helmet': path.resolve(__dirname, 'src/libs/react-helmet/index.js'),
+    },
+  },
+  build: {
+    outDir: 'dist', // ✅ explicitly set the build output folder
+  },
+  base: './',       // ✅ ensures relative paths work on Azure
+})
 
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Set up Node.js version
-        uses: actions/setup-node@v3
-        with:
-          node-version: '20.x'
-
-      - name: Install dependencies and build
-        run: |
-          npm install
-          npm run build
-
-      - name: Upload artifact for deployment job
-        uses: actions/upload-artifact@v4
-        with:
-          name: node-app
-          path: dist   # ✅ only upload the Vite build output
-
-  deploy:
-    runs-on: ubuntu-latest
-    needs: build
-    permissions:
-      id-token: write
-      contents: read
-
-    steps:
-      - name: Download artifact from build job
-        uses: actions/download-artifact@v4
-        with:
-          name: node-app
-      
-      - name: Login to Azure
-        uses: azure/login@v2
-        with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_62A93D30A29943E497CE368579EB9B66 }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_53168741603748F4AB5B69CE9026B8C8 }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_F6CF0568B43A452398E6C2E642653D39 }}
-
-      - name: Deploy to Azure Web App
-        uses: azure/webapps-deploy@v3
-        with:
-          app-name: 'Event-App'
-          slot-name: 'Production'
-          package: ./dist   # ✅ deploy the actual Vite build folder
